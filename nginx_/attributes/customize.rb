@@ -1,1 +1,0 @@
-normal[:nginx][:keepalive_timeout] = 90
