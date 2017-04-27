@@ -27,7 +27,7 @@ JSON such as the following added as custom JSON to the stack:
   "sidekiq": {
     "YOUR_APP_NAME": {
       "slacker": {
-        "process_count": 2,
+        "process_count": 2
         "config" : {
           "concurrency": 5,
           "verbose": false,
@@ -36,7 +36,7 @@ JSON such as the following added as custom JSON to the stack:
       },
       "hard_worker": {
         "config": {
-          "concurrency": 40,
+          "concurrency": 40
           "queues": [
             ["often", 7],
             ["default", 5],
@@ -64,7 +64,7 @@ By just converting your JSON config object to yaml we support any plugins that u
 
 You can use any name, such as "import_process", "one", "emailer", "slacker", or "fred". You are not stuck to meaningless names such as "worker1".
 
-If the instance is not in a opsworks Rails application server layer then a database.yml and memcached.yml will be generated if they don't exist.
+If the instance is not in a opsworks Rails application server layer then a database.yml and redis.yml will be generated if they don't exist.
 
 ### 'Wrapper/Layer' Cookbooks
 
