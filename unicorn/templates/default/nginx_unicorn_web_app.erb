@@ -5,6 +5,9 @@ upstream unicorn_<%= @application[:domains].first %> {
 server {
   listen 80;
   server_name <%= @application[:domains].join(" ") %> <%= node[:hostname] %>;
+  if ($http_x_forwarded_proto != "https") {
+    rewrite ^(.*)$ https://$server_name$1 permanent;
+  }
 
   <% if @application[:log_format] %>
     <% @application[:log_format].each do |log_format_name| %>
@@ -21,11 +24,6 @@ server {
   <% if @application[:nginx] && @application[:nginx][:client_max_body_size] %>
     client_max_body_size <%= @application[:nginx][:client_max_body_size] %>;
   <% end %>
-  
-  if ($host ~* ^www\.(.*)) {
-      set $remove_www $1;
-      rewrite ^(.*)$ http://$remove_www$1 permanent;
-  }
 
   location / {
     try_files $uri/index.html $uri/index.htm @unicorn;
