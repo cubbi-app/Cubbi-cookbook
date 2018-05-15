@@ -3,6 +3,15 @@ upstream unicorn_<%= @application[:domains].first %> {
 }
 
 server {
+    listen 80 health_server;
+    server_name "";
+    location /health {
+        access_log off;
+        return  200;
+    }
+}
+
+server {
   listen 80;
   server_name <%= @application[:domains].join(" ") %> <%= node[:hostname] %>;
   
