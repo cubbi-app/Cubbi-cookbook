@@ -22,6 +22,11 @@ server {
     client_max_body_size <%= @application[:nginx][:client_max_body_size] %>;
   <% end %>
 
+  location /health {
+        access_log off;
+        return  200;
+  }
+
   location / {
     if ($http_x_forwarded_proto != "https") {
       return 301 https://$host$request_uri;
