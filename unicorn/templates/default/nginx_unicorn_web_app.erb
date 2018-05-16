@@ -3,21 +3,8 @@ upstream unicorn_<%= @application[:domains].first %> {
 }
 
 server {
-    listen 80 default_server;
-    server_name "";
-    location /health {
-        access_log off;
-        return  200;
-    }
-}
-
-server {
   listen 80;
   server_name <%= @application[:domains].join(" ") %> <%= node[:hostname] %>;
-  
-  if ($http_x_forwarded_proto != "https") {
-    return 301 https://$host$request_uri;
-  }
 
   <% if @application[:log_format] %>
     <% @application[:log_format].each do |log_format_name| %>
@@ -36,6 +23,9 @@ server {
   <% end %>
 
   location / {
+    if ($http_x_forwarded_proto != "https") {
+      return 301 https://$host$request_uri;
+    }
     try_files $uri/index.html $uri/index.htm @unicorn;
   }
 
