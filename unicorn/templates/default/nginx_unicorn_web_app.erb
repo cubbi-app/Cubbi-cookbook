@@ -3,7 +3,7 @@ upstream unicorn_<%= @application[:domains].first %> {
 }
 
 server {
-    listen 80 health_server;
+    listen 80 default_server;
     server_name "";
     location /health {
         access_log off;
