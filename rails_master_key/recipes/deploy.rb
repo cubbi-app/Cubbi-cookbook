@@ -3,7 +3,7 @@ node[:deploy].each do |application, deploy|
   current_path = deploy[:current_path]
   rails_master_key = node[:deploy][application][:environment]["RAILS_MASTER_KEY"]
   
-  Chef::Log.info("create master key for #{rails_env}: #{pwd}")
+  Chef::Log.info("create master key for #{rails_env}:")
   
   execute 'create_master_key' do
     user 'deploy'
