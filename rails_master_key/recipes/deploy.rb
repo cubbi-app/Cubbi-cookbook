@@ -1,4 +1,4 @@
-  node[:deploy].each do |application, deploy|
+node[:deploy].each do |application, deploy|
   rails_master_key = deploy[:rails_master_key]
 
   Chef::Log.info("create master key for #{rails_env}")
