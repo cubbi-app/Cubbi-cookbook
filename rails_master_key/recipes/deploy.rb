@@ -7,6 +7,6 @@ node[:deploy].each do |application, deploy|
   
   execute 'create_master_key' do
     user 'deploy'
-    command "mkdir -p #{current_path}/config/credentials && echo #{rails_master_key} > #{current_path}/config/credentials/#{rails_env}.key"
+    command "mkdir -p #{release_path}/config/credentials && echo #{rails_master_key} > #{release_path}/config/credentials/#{rails_env}.key"
   end
 end
