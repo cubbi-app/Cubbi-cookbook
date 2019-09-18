@@ -7,7 +7,7 @@ node[:deploy].each do |application, deploy|
   execute 'rake assets:precompile' do
     cwd current_path
     user 'deploy'
-    command "bundle exec rake assets:precompile RAILS_ENV=#{rails_env}"
+    command "SECRET_KEY_BASE=`bin/rake secret` bin/rake assets:precompile RAILS_ENV=#{rails_env}"
     environment 'RAILS_ENV' => rails_env
   end
 end
