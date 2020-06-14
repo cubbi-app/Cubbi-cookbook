@@ -55,7 +55,7 @@ server {
   }
 
  location /cable {
-    proxy_pass http://example_app;
+    proxy_pass http://cable;
     proxy_http_version 1.1;
     proxy_set_header Upgrade websocket;
     proxy_set_header Connection Upgrade;
